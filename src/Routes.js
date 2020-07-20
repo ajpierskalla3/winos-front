@@ -8,7 +8,6 @@ import Menu from './main/Menu'
 const Routes = () => {
     return (
         <BrowserRouter>
-            <Menu />
             <switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/signin" exact component={Signin} />
