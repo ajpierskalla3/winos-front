@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import styled from "styled-components";
+import { signout, isAuthenticated } from '../auth'
 
 
 const NavContainer = styled.div`
@@ -44,22 +45,50 @@ const NavContainer = styled.div`
 
 
  `
-const Menu = () => (
-    <NavContainer>
-        <nav>
-            <ul>
-                <li>
-                    <Link className="nav-link" to="/">Home</Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/signin">Signin</Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/signup">Signup</Link>
-                </li>
-            </ul>
-        </nav>
-    </NavContainer>
+const Menu = ({ history }) => (
+  <NavContainer>
+    <nav>
+      <ul>
+        <li>
+          <Link className="nav-link" to="/">Home</Link>
+        </li>
+
+        {isAuthenticated() && isAuthenticated().user.role === 1 && (
+          <li>
+            <Link className="nav-link" to="/admin/dashboard">Admin Dashboard</Link>
+          </li>
+        )}
+
+        {isAuthenticated() && isAuthenticated().user.role === 0 && (
+          <li>
+            <Link className="nav-link" to="/user/dashboard">Dashboard</Link>
+          </li>
+        )}
+        {!isAuthenticated() && (
+          <>
+            <li>
+              <Link className="nav-link" to="/signin">Signin</Link>
+            </li>
+            <li>
+              <Link className="nav-link" to="/signup">Signup</Link>
+            </li>
+          </>
+        )}
+
+        {isAuthenticated() && (
+          <li className="nav-link">
+            <Link>
+              <span className="nav-link" onClick={() => signout(() => {
+                history.push('/')
+              })}>
+                Signout
+            </span>
+            </Link>
+          </li>
+        )}
+      </ul>
+    </nav>
+  </NavContainer>
 )
 
 export default withRouter(Menu);

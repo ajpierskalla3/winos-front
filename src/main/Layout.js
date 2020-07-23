@@ -3,7 +3,7 @@ import Menu from './Menu';
 import styled from "styled-components";
 
 const LayoutStyle = styled.div`
-    background-color: blue;
+    background-color: #83677B;
 `
 
 const Layout = ({ title = "Title", description = "Description", children }) => {

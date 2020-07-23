@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import Layout from '../main/Layout';
 import styled from 'styled-components';
 import { API } from '../config';
+import { signup } from '../auth'
 
 
 const Signup = () => {
@@ -13,32 +15,33 @@ const Signup = () => {
         success: false
     });
 
-    const { name, email, password } = values
+    const { name, email, password, success, error } = values
 
     const handleChange = (name) => (event) => {
         setValues({ ...values, error: false, [name]: event.target.value })
     }
 
-    const signup = (user) => {
-        fetch(`${API}/signup`, {
-            method: "POST",
-            headers: {
-                Accept: 'application/json',
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => {
-                return res.json()
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+
 
     const clickSubmit = (event) => {
         event.preventDefault()
+        setValues({ ...values, error: false })
         signup({ name, email, password })
+            .then(data => {
+                if (data.error) {
+                    setValues({ ...values, error: data.error, success: false })
+                } else {
+                    setValues({
+                        ...values,
+                        name: '',
+                        email: '',
+                        password: '',
+                        error: '',
+                        success: true
+
+                    })
+                }
+            })
 
     }
 
@@ -46,27 +49,41 @@ const Signup = () => {
         <form>
             <div className="signup-form">
                 <label className="text">Name</label>
-                <input onChange={handleChange('name')} type="text" className="input" />
+                <input onChange={handleChange('name')} type="text" className="input" value={name} />
             </div>
             <div className="signup-form">
                 <label className="text">Email</label>
-                <input onChange={handleChange('email')} type="email" className="input" />
+                <input onChange={handleChange('email')} type="email" className="input" value={email} />
             </div>
             <div className="signup-form">
                 <label className="text">Password</label>
-                <input onChange={handleChange('password')} type="password" className="input" />
+                <input onChange={handleChange('password')} type="password" className="input" value={password} />
             </div>
             <button onClick={clickSubmit}>Submit</button>
 
         </form>
+    )
+
+    const showError = () => (
+        <div className="show-error" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    )
+
+    const showSuccess = () => (
+        <div className="show-success" style={{ display: success ? '' : 'none' }}>
+            New Account Created. <Link to='/signin'>Sign in here</Link>
+        </div>
     )
     return (
         <div>
             <Layout title='Signup' description="Signup to the worlds greates wine app.">
 
             </Layout>
+
+            {showSuccess()}
+            {showError()}
             {signUpForm()}
-            {/* {JSON.stringify(values)} */}
         </div>
 
     )
