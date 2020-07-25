@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../main/Layout';
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
+import Layout from "../core/Layout";
 import { createProduct, getCategories } from './apiAdmin';// to be imported later  getCategories
 
 const AddProduct = () => {
@@ -136,7 +136,7 @@ const AddProduct = () => {
                     <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
                 </div>
 
-                <button className="btn btn-outline-primary">Create Product</button>
+                <button className="btn btn-outline-primary">Add Wine</button>
             </form>
         </>
     );
