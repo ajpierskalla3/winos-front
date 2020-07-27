@@ -3,6 +3,19 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { createCategory } from "./apiAdmin";
+import styled from 'styled-components';
+
+const categoryWrapper = styled.div`
+    .text-warning{
+        border: none;
+        background: none;
+        padding: none;
+        text-decoration: none;
+    }
+    .text{
+        padding-right: 10px;
+    }
+`
 
 const AddCategory = () => {
     const [name, setName] = useState("");
@@ -51,7 +64,7 @@ const AddCategory = () => {
 
     const showSuccess = () => {
         if (success) {
-            return <h3 className="text-success">{name} is created</h3>;
+            return <h3 className="text">{name} is created</h3>;
         }
     };
 
@@ -62,17 +75,20 @@ const AddCategory = () => {
     };
 
     const goBack = () => (
-        <div className="mt-5">
-            <Link to="/admin/dashboard" className="text-warning">
-                Back to Wine Dashboard
+        <categoryWrapper>
+            <div className="text-warning">
+                <Link to="/admin/dashboard" className="text-warning">
+                    Back to Wine Dashboard
             </Link>
-        </div>
+            </div>
+        </categoryWrapper>
     );
 
     return (
+
         <Layout
-            title="Add a new category"
-            description={`G'day ${user.name}, ready to add a new category?`}
+            title="Add a new varietal"
+            description={`Welcome ${user.name}, ready to add a new varietal?`}
         >
             <div className="row">
                 <div className="col-md-8 offset-md-2">
@@ -82,7 +98,9 @@ const AddCategory = () => {
                     {goBack()}
                 </div>
             </div>
+
         </Layout>
+
     );
 };
 

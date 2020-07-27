@@ -7,6 +7,7 @@ const LayoutWrapper = styled.div`
  color: white;
  font-family: "Apple Chancery";
  font-weight: 100;
+ align-content: center
  /* display: flex;
  flex-flow: row;
  justify-content: space-between; */

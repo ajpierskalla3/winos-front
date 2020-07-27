@@ -20,6 +20,7 @@ const ShopWrapper = styled.div`
     padding-bottom: 15px;
 
 
+
 }
 `
 
@@ -152,7 +153,7 @@ const Shop = () => {
 
                 <ShopWrapper>
                     <div className="wines">
-                        <h2 className="mb-4">Wine Home</h2>
+                        {/* <h2 className="mb-4">Wine Home</h2> */}
                         <div className="list">
                             {filteredResults.map((product, i) => (
                                 <div key={i} className="wine-solo">
@@ -160,7 +161,7 @@ const Shop = () => {
                                 </div>
                             ))}
                         </div>
-                        <hr />
+
                         {loadMoreButton()}
                     </div>
                 </ShopWrapper>
