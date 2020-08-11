@@ -63,8 +63,8 @@ const UpdateCategory = ({ match }) => {
     const updateCategoryForm = () => (
         <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form className="mb-5" onSubmit={submitCategoryForm}>
-                <span className="login100-form-title p-b-32 m-b-7">Update Varietal Form</span>
-                <span className="txt1 p-b-11">Varietal Name</span>
+                <span className="login100-form-title p-b-32 m-b-7">Update Category Form</span>
+                <span className="txt1 p-b-11">Category Name</span>
                 <br />
                 <br />
                 <div className="wrap-input100 validate-input m-b-36">
@@ -107,7 +107,7 @@ const UpdateCategory = ({ match }) => {
         return (
             <div className="mt-5">
                 <Link to="/admin/categories" className="text-info">
-                    Back To Wine Home
+                    Back To Admin Home
                 </Link>
             </div>
         );

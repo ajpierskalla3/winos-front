@@ -5,19 +5,13 @@ import { Link } from "react-router-dom";
 import { getProducts, deleteProduct } from "./apiAdmin";
 import styled from 'styled-components';
 
-const ManageWrapper = styled.div`
-span{
-    color: white;
-    padding: 5px;
-    text-decoration: none;
-}
 
-span:visited{
-    text-decoration: none;
-    color: white;
-}
-
-
+const manageWrapper = styled.div`
+    .flex{
+        display: flex;
+        justify-content: flex-end;
+        margin: 50px;
+    }
 `
 
 const ManageProducts = () => {
@@ -26,7 +20,6 @@ const ManageProducts = () => {
     const { user, token } = isAuthenticated();
 
     const loadProducts = () => {
-
         getProducts().then(data => {
             if (data.error) {
                 console.log(data.error);
@@ -52,26 +45,26 @@ const ManageProducts = () => {
 
     return (
         <Layout
-            title="Manage wines"
-            description="Update or delete wines"
+            title="Winos"
+            description="Update or Delete Wines"
             className="container-fluid"
         >
             <div className="row">
                 <div className="col-12">
                     <h2 className="text-center">
-                        Total {products.length} wines
+                        Total {products.length} products
                     </h2>
                     <hr />
-                    <ManageWrapper>
-                        <ul className="list-group">
-                            {products.map((p, i) => (
-                                <li
-                                    key={i}
-                                    className="list-group-item d-flex justify-content-between align-items-center"
-                                >
-                                    <strong>{p.name}: </strong>
+                    <ul className="list-group">
+                        {products.map((p, i) => (
+                            <li
+                                key={i}
+                                className="list-group-item d-flex justify-content-between align-items-center"
+                            >
+                                <strong>{p.name}</strong>
+                                <div className="flex">
                                     <Link to={`/admin/product/update/${p._id}`}>
-                                        <span className="badge badge-warning badge-pill">
+                                        <span style={{ margin: "5px" }} className="badge badge-warning badge-pill">
                                             Update
                                     </span>
                                     </Link>
@@ -81,10 +74,10 @@ const ManageProducts = () => {
                                     >
                                         Delete
                                 </span>
-                                </li>
-                            ))}
-                        </ul>
-                    </ManageWrapper>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                     <br />
                 </div>
             </div>

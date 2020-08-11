@@ -130,7 +130,7 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Category</label>
+                <label className="text-muted">Varietal</label>
                 <select onChange={handleChange('category')} className="form-control">
                     <option>Please select</option>
                     {categories &&
@@ -143,7 +143,7 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Shipping</label>
+                <label className="text-muted">Did You Like This Wine?</label>
                 <select onChange={handleChange('shipping')} className="form-control">
                     <option>Please select</option>
                     <option value="0">No</option>
@@ -152,11 +152,11 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Quantity</label>
+                <label className="text-muted">Varietal year</label>
                 <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
             </div>
 
-            <button className="btn btn-outline-primary">Update Product</button>
+            <button className="btn btn-outline-secondary">Update Wine</button>
         </form>
     );
 
@@ -188,7 +188,7 @@ const UpdateProduct = ({ match }) => {
     };
 
     return (
-        <Layout title="Add a new product" description={`G'day ${user.name}, ready to add a new product?`}>
+        <Layout title="Add a new Wine" description={`Hello ${user.name}, update an existing wine`}>
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {showLoading()}

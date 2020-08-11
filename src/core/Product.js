@@ -42,14 +42,14 @@ const Product = props => {
                     {product && product.description && <Card product={product} showViewProductButton={false} />}
                 </div>
 
-                {/* <div className="col-4">
+                <div className="col-4">
                     <h4>Related products</h4>
                     {relatedProduct.map((p, i) => (
                         <div className="mb-3" key={i}>
                             <Card product={p} />
                         </div>
                     ))}
-                </div> */}
+                </div>
             </div>
         </Layout>
     );

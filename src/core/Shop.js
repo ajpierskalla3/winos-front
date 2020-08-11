@@ -3,33 +3,8 @@ import Layout from "./Layout";
 import Card from "./Card";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
-// import RadioBox from "./RadioBox";
+import RadioBox from "./Radiobox";
 import { prices } from "./fixedPrices";
-import styled from 'styled-components';
-
-const ShopWrapper = styled.div`
-.wines{
-    padding-left: 400px;
-    padding-bottom: 30px;
-}
-.wine-solo{
-    border: 1px solid white;
-    padding-left: 50px;
-    margin-bottom: 10px;
-    width: 550px;
-    padding-bottom: 15px;
-
-
-
-}
-`
-
-// const ShopTop = styled.div`
-//     padding-left: 100px;
-// `
-
-
-
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
@@ -42,28 +17,28 @@ const Shop = () => {
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
 
-    const init = () => {
-        getCategories().then(data => {
-            if (data.error) {
-                setError(data.error);
-            } else {
-                setCategories(data);
-            }
-        });
-    };
+    // const init = () => {
+    //     getCategories().then(data => {
+    //         if (data.error) {
+    //             setError(data.error);
+    //         } else {
+    //             setCategories(data);
+    //         }
+    //     });
+    // };
 
-    const loadFilteredResults = newFilters => {
-        // console.log(newFilters);
-        getFilteredProducts(skip, limit, newFilters).then(data => {
-            if (data.error) {
-                setError(data.error);
-            } else {
-                setFilteredResults(data.data);
-                setSize(data.size);
-                setSkip(0);
-            }
-        });
-    };
+    // const loadFilteredResults = newFilters => {
+    //     // console.log(newFilters);
+    //     getFilteredProducts(skip, limit, newFilters).then(data => {
+    //         if (data.error) {
+    //             setError(data.error);
+    //         } else {
+    //             setFilteredResults(data.data);
+    //             setSize(data.size);
+    //             setSkip(0);
+    //         }
+    //     });
+    // };
 
     const loadMore = () => {
         let toSkip = skip + limit;
@@ -90,10 +65,10 @@ const Shop = () => {
         );
     };
 
-    useEffect(() => {
-        init();
-        loadFilteredResults(skip, limit, myFilters.filters);
-    }, []);
+    // useEffect(() => {
+    //     // init();
+    //     loadFilteredResults(skip, limit, myFilters.filters);
+    // }, []);
 
     const handleFilters = (filters, filterBy) => {
         // console.log("SHOP", filters, filterBy);
@@ -104,7 +79,7 @@ const Shop = () => {
             let priceValues = handlePrice(filters);
             newFilters.filters[filterBy] = priceValues;
         }
-        loadFilteredResults(myFilters.filters);
+        // loadFilteredResults(myFilters.filters);
         setMyFilters(newFilters);
     };
 
@@ -122,15 +97,13 @@ const Shop = () => {
 
     return (
         <Layout
-
-            title="Wine Page"
-            description="Search and find wines you have saved"
+            title="Shop Page"
+            description="Search and find books of your choice"
             className="container-fluid"
         >
-            {/* <ShopTop> */}
             <div className="row">
                 <div className="col-4">
-                    <h4>Filter by varietals</h4>
+                    <h4>Filter by categories</h4>
                     <ul>
                         <Checkbox
                             categories={categories}
@@ -140,7 +113,7 @@ const Shop = () => {
                         />
                     </ul>
 
-                    {/* <h4>Filter by price range</h4>
+                    <h4>Filter by price range</h4>
                     <div>
                         <RadioBox
                             prices={prices}
@@ -148,25 +121,22 @@ const Shop = () => {
                                 handleFilters(filters, "price")
                             }
                         />
-                    </div> */}
+                    </div>
                 </div>
 
-                <ShopWrapper>
-                    <div className="wines">
-                        {/* <h2 className="mb-4">Wine Home</h2> */}
-                        <div className="list">
-                            {filteredResults.map((product, i) => (
-                                <div key={i} className="wine-solo">
-                                    <Card product={product} />
-                                </div>
-                            ))}
-                        </div>
-
-                        {loadMoreButton()}
+                <div className="col-8">
+                    <h2 className="mb-4">Products</h2>
+                    <div className="">
+                        {filteredResults.map((product, i) => (
+                            <div key={i} className="col-4 mb-3">
+                                <Card product={product} />
+                            </div>
+                        ))}
                     </div>
-                </ShopWrapper>
+                    <hr />
+                    {loadMoreButton()}
+                </div>
             </div>
-            {/* </ShopTop> */}
         </Layout>
     );
 };

@@ -5,18 +5,6 @@ import { Link } from "react-router-dom";
 import { createCategory } from "./apiAdmin";
 import styled from 'styled-components';
 
-const categoryWrapper = styled.div`
-    .text-warning{
-        border: none;
-        background: none;
-        padding: none;
-        text-decoration: none;
-    }
-    .text{
-        padding-right: 10px;
-    }
-`
-
 const AddCategory = () => {
     const [name, setName] = useState("");
     const [error, setError] = useState(false);
@@ -37,7 +25,7 @@ const AddCategory = () => {
         // make request to api to create category
         createCategory(user._id, token, { name }).then(data => {
             if (data.error) {
-                setError(true);
+                setError(data.error);
             } else {
                 setError("");
                 setSuccess(true);
@@ -58,13 +46,13 @@ const AddCategory = () => {
                     required
                 />
             </div>
-            <button className="btn btn-outline-primary">Create Varietal</button>
+            <button className="btn btn-outline-secondary">Create Varietal</button>
         </form>
     );
 
     const showSuccess = () => {
         if (success) {
-            return <h3 className="text">{name} is created</h3>;
+            return <h3 className="text-success">{name} is created</h3>;
         }
     };
 
@@ -75,22 +63,19 @@ const AddCategory = () => {
     };
 
     const goBack = () => (
-        <categoryWrapper>
-            <div className="text-warning">
-                <Link to="/admin/dashboard" className="text-warning">
-                    Back to Wine Dashboard
+        <div className="mt-5">
+            <Link to="/admin/dashboard" className="text-warning">
+                Back to Dashboard
             </Link>
-            </div>
-        </categoryWrapper>
+        </div>
     );
 
     return (
-
         <Layout
-            title="Add a new varietal"
-            description={`Welcome ${user.name}, ready to add a new varietal?`}
+            title="Winos"
+            description={`Add a new varietal`}
         >
-            <div className="row">
+            <div className="">
                 <div className="col-md-8 offset-md-2">
                     {showSuccess()}
                     {showError()}
@@ -98,9 +83,7 @@ const AddCategory = () => {
                     {goBack()}
                 </div>
             </div>
-
         </Layout>
-
     );
 };
 

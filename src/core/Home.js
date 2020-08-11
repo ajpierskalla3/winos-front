@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { getProducts } from './apiCore';
 import Card from './Card';
-import Search from './Search';
-import styled from "styled-components";
+import styled from 'styled-components'
+// import CheckBox from './Checkbox';
 
 
-const HomeWrapper = styled.div`
 
-`
 
 
 const Home = () => {
@@ -43,32 +41,32 @@ const Home = () => {
     }, []);
 
     return (
-        <HomeWrapper>
-            <Layout
-                title="Welcome To Winos"
-                description="Store and save all your favorite wines"
-                className="container-fluid"
-            >
-                <Search />
-                <h2 className="mb-4">Your Most Recent Wines</h2>
-                <div className="row">
+        <Layout
+            title="Welcome to Winos"
+            description="A place to save and rate all your favorite wines"
+            className="container-fluid"
+        >
+
+            {/* <Checkbox /> */}
+            <h2 className="mb-4">My Wines</h2>
+            <homeWrapper>
+                <div style={{ display: "unset" }} className="row">
                     {productsByArrival.map((product, i) => (
-                        <div key={i} className="col-4 mb-3">
+                        <div key={i} className="mb-3">
                             <Card product={product} />
                         </div>
                     ))}
                 </div>
-
-                {/* <h2 className="mb-4">Favorites</h2>
-                <div className="row">
-                    {productsBySell.map((product, i) => (
-                        <div key={i} className="col-4 mb-3">
-                            <Card product={product} />
-                        </div>
-                    ))}
-                </div> */}
-            </Layout>
-        </HomeWrapper>
+            </homeWrapper>
+            {/* <h2 className="mb-4">Best Sellers</h2>
+            <div className="row">
+                {productsBySell.map((product, i) => (
+                    <div key={i} className="col-4 mb-3">
+                        <Card product={product} />
+                    </div>
+                ))}
+            </div> */}
+        </Layout >
     );
 };
 

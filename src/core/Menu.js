@@ -2,48 +2,26 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
-import styled from "styled-components";
+import styled from 'styled-components'
 
-const MenuWrapper = styled.div`
-background: none;
-display: flex;
-justify-content: flex-end;
-/* color: #FFFAFA; */
-
-
-
-ul{
-  display: flex;
-  padding: 5px;
-  justify-content: space-around
+const menuWrapper = styled.div`
+.nav{
+  background: pink;
 }
 
-li{
-  padding: 20px;
-  text-decoration: none;
-  list-style-type: none;
-}
-
-.nav-link{
-  text-decoration: none;
-  font-family: "Apple Chancery";
-  font-weight: 100;
-  color: pink;
-}
 `
-
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "white" };
+    return { color: "#ff9900" };
   } else {
     return { color: "#ffffff" };
   }
 };
 
 const Menu = ({ history }) => (
-  <MenuWrapper>
-    <ul className="nav nav-tabs bg-primary">
+  <div>
+    <ul style={{ background: '#501B1D' }} className="nav nav-tabs card-header-1">
       <li className="nav-item">
         <Link
           className="nav-link"
@@ -84,7 +62,7 @@ const Menu = ({ history }) => (
             style={isActive(history, "/user/dashboard")}
             to="/user/dashboard"
           >
-            Wine Dashboard
+            Dashboard
                     </Link>
         </li>
       )}
@@ -96,7 +74,7 @@ const Menu = ({ history }) => (
             style={isActive(history, "/admin/dashboard")}
             to="/admin/dashboard"
           >
-            Wine Dashboard
+            Dashboard
                     </Link>
         </li>
       )}
@@ -141,7 +119,7 @@ const Menu = ({ history }) => (
         </li>
       )}
     </ul>
-  </MenuWrapper>
+  </div>
 );
 
 export default withRouter(Menu);

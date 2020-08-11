@@ -3,6 +3,20 @@ import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
 import { addItem, updateItem, removeItem } from './cartHelpers';
+import styled from 'styled-components';
+
+
+const cardWrapper = styled.div`
+@media only screen and (max-width: 600px) {
+ .card{
+    width: 100%;
+  }
+
+  .row{
+      display: unset;
+  }
+}
+`
 
 const Card = ({
     product,
@@ -21,7 +35,7 @@ const Card = ({
         return (
             showViewProductButton && (
                 <Link to={`/product/${product._id}`} className="mr-2">
-                    <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Wine </button>
+                    <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
                 </Link>
             )
         );
@@ -45,14 +59,6 @@ const Card = ({
                 </button>
             )
         );
-    };
-
-    const showStock = quantity => {
-        return quantity > 0 ? (
-            <span className="badge badge-primary badge-pill">In Stock </span>
-        ) : (
-                <span className="badge badge-primary badge-pill">Out of Stock </span>
-            );
     };
 
     const handleChange = productId => event => {
@@ -94,24 +100,25 @@ const Card = ({
     };
     return (
         <div className="card ">
-            <div className="card-header card-header-1 ">{product.name}</div>
+            <div style={{ background: "#ADADAD" }} className="card-header card-header-1 ">{product.name}</div>
             <div className="card-body">
                 {shouldRedirect(redirect)}
                 <ShowImage item={product} url="product" />
                 <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
-                <p className="card-p black-10">$ {product.price}</p>
-                <p className="black-9">Varietal: {product.category && product.category.name}</p>
-                <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
-                {/* {showStock(product.quantity)} */}
+                <p className="card-p black-7">Price: $ {product.price}</p>
+                <p className="black-7">Varietal: {product.category && product.category.name}</p>
+                <p className="black-7">Year: {product.quantity} </p>
+                <p className="black-7">Added on {moment(product.createdAt).fromNow()}</p>
+
                 <br />
 
-                {showViewButton(showViewProductButton)}
+                {/* {showViewButton(showViewProductButton)}
 
-                {/* {showAddToCartBtn(showAddToCartButton)} */}
+                {showAddToCartBtn(showAddToCartButton)}
 
-                {/* {showRemoveButton(showRemoveProductButton)} */}
+                {showRemoveButton(showRemoveProductButton)} */}
 
-                {/* {showCartUpdateOptions(cartUpdate)} */}
+                {showCartUpdateOptions(cartUpdate)}
             </div>
         </div>
     );
