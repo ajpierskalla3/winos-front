@@ -1,15 +1,14 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
-import { itemTotal } from "./cartHelpers";
-import styled from 'styled-components'
+// import { itemTotal } from "./cartHelpers";
+import styled from "styled-components";
 
 const menuWrapper = styled.div`
-.nav{
-  background: pink;
-}
-
-`
+  .nav {
+    background: pink;
+  }
+`;
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -21,39 +20,15 @@ const isActive = (history, path) => {
 
 const Menu = ({ history }) => (
   <div>
-    <ul style={{ background: '#501B1D' }} className="nav nav-tabs card-header-1">
+    <ul
+      style={{ background: "#501B1D" }}
+      className="nav nav-tabs card-header-1"
+    >
       <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(history, "/")}
-          to="/"
-        >
+        <Link className="nav-link" style={isActive(history, "/")} to="/">
           Home
-                </Link>
-      </li>
-
-      {/* <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(history, "/shop")}
-          to="/shop"
-        >
-          Shop
-                </Link>
-      </li> */}
-
-      {/* <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(history, "/cart")}
-          to="/cart"
-        >
-          Cart{" "}
-          <sup>
-            <small className="cart-badge">{itemTotal()}</small>
-          </sup>
         </Link>
-      </li> */}
+      </li>
 
       {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <li className="nav-item">
@@ -63,7 +38,7 @@ const Menu = ({ history }) => (
             to="/user/dashboard"
           >
             Dashboard
-                    </Link>
+          </Link>
         </li>
       )}
 
@@ -75,7 +50,7 @@ const Menu = ({ history }) => (
             to="/admin/dashboard"
           >
             Dashboard
-                    </Link>
+          </Link>
         </li>
       )}
 
@@ -88,7 +63,7 @@ const Menu = ({ history }) => (
               to="/signin"
             >
               Signin
-                        </Link>
+            </Link>
           </li>
 
           <li className="nav-item">
@@ -98,7 +73,7 @@ const Menu = ({ history }) => (
               to="/signup"
             >
               Signup
-                        </Link>
+            </Link>
           </li>
         </Fragment>
       )}
@@ -115,7 +90,7 @@ const Menu = ({ history }) => (
             }
           >
             Signout
-                    </span>
+          </span>
         </li>
       )}
     </ul>
