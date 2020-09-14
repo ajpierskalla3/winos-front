@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { signout, isAuthenticated } from "../auth";
+import { signout, isAuthenticated } from "../auth/AdminAPI";
 // import { itemTotal } from "./cartHelpers";
 import styled from "styled-components";
 

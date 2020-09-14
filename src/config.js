@@ -1,1 +1,4 @@
-export const API = process.env.REACT_APP_API_URL;
+export const API =
+  process.env.NODE_ENV === "development"
+    ? process.env.DEV_URL
+    : process.env.PROD_URL;
